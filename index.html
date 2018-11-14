@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // vue双向数据绑定是数据劫持结合了发布者和订阅者模式的方式来实现
+    var book = {};
+    var name = '';
+    // 我们通过Object.defineProperty()设置了对象的book 属性，对其get和set进行了重写操作，get就是读取name属性这个值触发的函数，set就是在设置name属性这值触发的函数，所以当执行book.name=‘vue权威指南’这个语句时，控制台就会打印出‘你去了一个书名叫《vue权威指南》’，因为我们在get函数里面对该值做了加工
+    /**
+     * 对象
+     * 属性名
+     * set方法
+     * get方法
+     */
+    Object.defineProperty(book, 'name', {
+      set: function (value) {
+        name = value;
+        console.log('你取了一个书名叫' + value);
+      },
+      get: function () {
+        return '《' + name + '》'
+      }
+    })
+
+    book.name = 'vue权威指南'
+    console.log(book.name);
+    console.log(book);
+  </script>
+</body>
+
+</html>
